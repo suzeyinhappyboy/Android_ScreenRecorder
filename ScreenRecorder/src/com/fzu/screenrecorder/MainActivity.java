@@ -16,6 +16,7 @@
 package com.fzu.screenrecorder;
 
 import java.io.File;
+import java.io.IOException;
 
 import com.fzu.screenrecorder.R;
 
@@ -56,8 +57,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // video size
         final int width = 1280;
         final int height = 720;
-        File file = new File(Environment.getExternalStorageDirectory(),
-                "record-" + width + "x" + height + "-" + System.currentTimeMillis() + ".mp4");
+        File file = new File(Environment.getExternalStorageDirectory() + "/"
+                + MainActivity.this.getPackageName() + "/ScreenRecorder-" + width + "x" + height + "-" 
+                + ".mp4"); 
+        File dirs = new File(file.getParent());
+        if (!dirs.exists())
+            dirs.mkdirs();
+        try {
+			file.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//        File file = new File(Environment.getExternalStorageDirectory(),
+//                "record-" + width + "x" + height + "-" + System.currentTimeMillis() + ".mp4");
         final int bitrate = 6000000;
         mRecorder = new ScreenRecorder(width, height, bitrate, 1, mediaProjection, file.getAbsolutePath());
         mRecorder.start();
