@@ -31,14 +31,13 @@ import okhttp3.Request;
 public class MainActivity extends AppCompatActivity
 {
 
-    private String mBaseUrl = "http://localhost/ScreenRecorder/";
+    private String mBaseUrl = "http://192.168.253.1/ScreenRecorder/";
 
     private static final String TAG = "MainActivity";
 
     private TextView mTv;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
-
 
     public class MyStringCallback extends StringCallback
     {
@@ -104,8 +103,8 @@ public class MainActivity extends AppCompatActivity
 
     public void getHtml(View view)
     {
-        String url = "http://www.zhiyun-tech.com/App/Rider-M/changelog-zh.txt";
-        url="http://www.391k.com/api/xapi.ashx/info.json?key=bd_hyrzjjfb4modhj&size=10&page=1";
+        String url = "http://192.168.253.1/meiting/getmusic.php";
+        //String url="http://www.baidu.com";
         OkHttpUtils
                 .get()
                 .url(url)
@@ -130,7 +129,13 @@ public class MainActivity extends AppCompatActivity
 
     public void postFile(View view)
     {
-        File file = new File(Environment.getExternalStorageDirectory(), "messenger_01.png");
+    	int width = 1280;
+        int height = 720;
+    	/*File file = new File(Environment.getExternalStorageDirectory()
+    			, "/ScreenRecorder-" + width + "x" + height + "-" 
+                        + ".mp4");*/
+        File file = new File(Environment.getExternalStorageDirectory()
+    			, "su" + ".jpg");
         if (!file.exists())
         {
             Toast.makeText(MainActivity.this, "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
@@ -202,10 +207,7 @@ public class MainActivity extends AppCompatActivity
 
     public void getHttpsHtml(View view)
     {
-        String url = "https://kyfw.12306.cn/otn/";
-
-//                "https://12
-//        url =3.125.219.144:8443/mobileConnect/MobileConnect/authLogin.action?systemid=100009&mobile=13260284063&pipe=2&reqtime=1422986580048&ispin=2";
+        String url = "http://192.168.253.1/meiting/getmusic.php";
         OkHttpUtils
                 .get()//
                 .url(url)//
@@ -218,7 +220,7 @@ public class MainActivity extends AppCompatActivity
     public void getImage(View view)
     {
         mTv.setText("");
-        String url = "http://images.csdn.net/20150817/1.jpg";
+        String url = mBaseUrl + "myimg.jpg";
         OkHttpUtils
                 .get()//
                 .url(url)//
@@ -250,17 +252,16 @@ public class MainActivity extends AppCompatActivity
     	int width = 1280;
         int height = 720;
         //File file = new File(Environment.getExternalStorageDirectory(), "messenger_01.png");
-        File file = new File(Environment.getExternalStorageDirectory() + "/"
-                + MainActivity.this.getPackageName() + "/ScreenRecorder-" + width + "x" + height + "-" 
-                + ".mp4"); 
+        File file = new File(Environment.getExternalStorageDirectory()
+    			, "/ScreenRecorder-" + width + "x" + height + "-" + ".mp4"); 
         if (!file.exists())
         {
             Toast.makeText(MainActivity.this, "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
             return;
         }
         Map<String, String> params = new HashMap<>();
-        params.put("username", "张鸿洋");
-        params.put("password", "123");
+        params.put("username", "root");
+        params.put("password", "passwd");
 
         Map<String, String> headers = new HashMap<>();
         headers.put("APP-Key", "APP-Secret222");
@@ -303,12 +304,12 @@ public class MainActivity extends AppCompatActivity
 
     public void downloadFile(View view)
     {
-        String url = "https://github.com/hongyangAndroid/okhttp-utils/blob/master/okhttputils-2_4_1.jar?raw=true";
+        String url = mBaseUrl + "myimg.jpg";
         OkHttpUtils//
                 .get()//
                 .url(url)//
                 .build()//
-                .execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), "gson-2.2.1.jar")//
+                .execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), "myimg.jpg")//
                 {
 
                     @Override
