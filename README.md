@@ -2,4 +2,5 @@
 android直播推流端开发；实现屏幕录制与推流到服务器
 
 名家解读干货：
-(https://www.zhihu.com/people/rosicky311)
+(https://zhuanlan.zhihu.com/p/20717041)
+(https://www.zhihu.com/question/42162310)
